@@ -279,25 +279,29 @@ fun ResistanceCalculator() {
                 onDismissRequest = { expanded4 = false }
             ) {
                 colors.forEach { color ->
-                    DropdownMenuItem(
-                        text = {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(40.dp)
-                                    .background(Color(android.graphics.Color.parseColor(colorHexValues[color])))
-                                    .clip(RoundedCornerShape(12.dp)),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(text = color)
-                                Text(text = toleranceValues[color]?.toString() ?: "Valor no disponible")
+                    val valor = toleranceValues[color]
+
+                    if (valor != null) {
+                        DropdownMenuItem(
+                            text = {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(40.dp)
+                                        .background(Color(android.graphics.Color.parseColor(colorHexValues[color])))
+                                        .clip(RoundedCornerShape(12.dp)),
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    Text(text = color)
+                                    Text(text = toleranceValues[color].toString())
+                                }
+                            },
+                            onClick = {
+                                band4 = color
+                                expanded4 = false
                             }
-                        },
-                        onClick = {
-                            band4 = color
-                            expanded4 = false
-                        }
-                    )
+                        )
+                    }
                 }
             }
         }
